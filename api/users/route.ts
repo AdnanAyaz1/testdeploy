@@ -1,4 +1,4 @@
-import { connectToDB } from "@/lib/mongodb";
+import dbConnect from "@/lib/mongodb";
 import user from "@/models/user";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -8,8 +8,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  await connectToDB();
-
+  await dbConnect();
   if (req.method === "GET") {
     const users = await user.find({});
     return res.status(200).json(users);
